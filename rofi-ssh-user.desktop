@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Rofi SSH user
+Exec=rofi-ssh-user.sh
+Icon=network-server
+Type=Application
+Categories=Utility
+X-KDE-StartupNotify=false
+StartupNotify=false
