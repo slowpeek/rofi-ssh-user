@@ -68,6 +68,10 @@ bye() {
     exit 1
 }
 
+tilderize() {
+    [[ $1 == "$HOME"* ]] && echo "~${1#"$HOME"}" || echo "$1"
+}
+
 check_empty() {
     [[ -n $1 ]] || bye "${@:2}"
 }
@@ -124,8 +128,8 @@ Special options:
 Extra options after '--' are passed directly to rofi.
 
 Default generic options and those tailored for rofi can be set in
-~${defaults#"$HOME"} with options() and rofi_options() arrays in bash
-syntax.
+$(tilderize "$defaults") with options() and rofi_options()
+arrays in bash syntax.
 
 'Host' sections in ssh config file can contain commands to alter the
 menu. Command syntax: '#+ command arg1 arg2 ...'. Available commands:
@@ -248,7 +252,7 @@ opt_first_pass() {
 
 source_defaults() {
     if [[ -e $defaults ]]; then
-        log_info found defaults file "~${defaults#"$HOME"}"
+        log_info found defaults file "$(tilderize "$defaults")"
         check_path "$defaults" f r
         source "$defaults"
     fi
@@ -345,7 +349,7 @@ main() {
     parse_ssh_config "$config" items_raw
 
     if [[ ! -v items_raw ]]; then
-        log_warn No hosts found in ssh config
+        log_warn No hosts found in "$(tilderize "$config")"
         exit
     fi
 
