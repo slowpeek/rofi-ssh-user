@@ -325,8 +325,6 @@ main() {
             -c|--config)
                 config=$2
                 shift ;;
-            -h|--help|-q|-s)
-                : ;;
             -t|--terminal)
                 terminal=$2
                 shift ;;
