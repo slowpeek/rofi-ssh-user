@@ -8,7 +8,7 @@ set -eu
 
 # Alternative rofi ssh picker.
 
-SCRIPT_VERSION=0.1
+SCRIPT_VERSION=0.1+git
 
 # https://github.com/slowpeek/jetopt ---
 jetopt () {
