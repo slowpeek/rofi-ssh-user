@@ -362,7 +362,7 @@ main() {
         items+=("$item")
     done
 
-    item=$(printf "%s\n" "${items[@]}" | sort -t@ -k2,2 -k1,1 | "$format" |
+    item=$(printf "%s\n" "${items[@]}" | sort -u -t@ -k2,2 -k1,1 | "$format" |
                rofi -dmenu -p ssh "$@")
     [[ -n $item ]] || exit
 
