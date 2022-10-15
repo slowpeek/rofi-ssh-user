@@ -224,7 +224,7 @@ align_list() {
 }
 
 opt_parse() {
-    jetopt aalign cconfig: hhelp q s V .version tterminal: -- "$@"
+    jetopt aalign cconfig: hhelp q s tterminal: Vversion -- "$@"
 }
 
 # Apply options only meaningful as direct cli args. In particular
