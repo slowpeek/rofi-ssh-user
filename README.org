@@ -51,7 +51,7 @@ When passed to rofi the list is sorted by host first, user next.
 * Usage
 
 #+begin_example
-  rofi-ssh-user.sh [options] [-- [rofi options]]
+  rofi-ssh-user [options] [-- [rofi options]]
 #+end_example
 
 Generic options:

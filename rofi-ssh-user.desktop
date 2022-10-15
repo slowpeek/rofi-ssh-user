@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Rofi SSH user
-Exec=rofi-ssh-user.sh
+Exec=rofi-ssh-user
 Icon=network-server
 Type=Application
 Categories=Utility
