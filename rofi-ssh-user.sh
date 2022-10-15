@@ -2,7 +2,7 @@
 # shellcheck disable=SC1090
 
 # MIT license (c) 2022 https://github.com/slowpeek
-# Homepage: https://github.com/slowpeek/rofi-scripts
+# Homepage: https://github.com/slowpeek/rofi-ssh-user
 
 set -eu
 
@@ -137,7 +137,7 @@ menu. Command syntax: '#+ command arg1 arg2 ...'. Available commands:
 alt                        Alternative users to use with the host
 hide                       Do not show this host in menu
 
-More details and examples at https://github.com/slowpeek/rofi-scripts
+More details and examples at https://github.com/slowpeek/rofi-ssh-user
 EOF
 
     exit
