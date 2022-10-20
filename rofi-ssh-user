@@ -10,42 +10,6 @@ set -eu
 
 SCRIPT_VERSION=0.1.2+git
 
-# https://github.com/slowpeek/jetopt ---
-jetopt () {
-    local arg type mode='' short='' long=''
-
-    while (( $# )); do
-        arg=$1
-
-        case $arg in
-            -*)
-                # Break on any literal option or '--'
-                break ;;
-
-            ,*)
-                # Scanning mode.
-                [[ $arg == ,[+-] ]] && mode=${arg:1} ;;
-
-            *)
-                # Option type.
-                type=${arg##*[!:]}
-                arg=${arg%"$type"}
-
-                # Short option, if present.
-                [[ $arg == .* ]] || short+=${arg::1}$type
-                arg=${arg:1}
-
-                # Long option, if present.
-                [[ -z $arg ]] || long+=,$arg$type
-        esac
-
-        shift
-    done
-
-    getopt -o "$mode$short" -l "${long:1}" "$@"
-}
-# ---
-
 t_green=$'\e[32m'
 t_red=$'\e[31m'
 t_yellow=$'\e[33m'
@@ -224,7 +188,8 @@ align_list() {
 }
 
 opt_parse() {
-    jetopt aalign cconfig: hhelp q s tterminal: Vversion -- "$@"
+    # jetopt aalign cconfig: hhelp q s tterminal: Vversion
+    getopt -o ac:hqst:V -l align,config:,help,terminal:,version -- "$@"
 }
 
 # Apply options only meaningful as direct cli args. In particular
