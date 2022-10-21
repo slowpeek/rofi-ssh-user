@@ -65,7 +65,7 @@ check_exec() {
 }
 
 version() {
-    echo "$SCRIPT_VERSION"
+    echo "rofi-ssh-user $SCRIPT_VERSION"
     exit
 }
 
