@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090
 
-# MIT license (c) 2022 https://github.com/slowpeek
+# MIT license (c) 2022-2024 https://github.com/slowpeek
 # Homepage: https://github.com/slowpeek/rofi-ssh-user
 
 set -eu
@@ -339,4 +339,4 @@ main() {
     echo "${cmd[@]}"
 }
 
-[[ ! ${BASH_SOURCE[0]} == "$0" ]] || main "$@"
+[[ ! ${BASH_SOURCE[0]##*/} == "${0##*/}" ]] || main "$@"
