@@ -15,8 +15,10 @@ t_red=$'\e[31m'
 t_yellow=$'\e[33m'
 t_reset=$'\e(B\e[m'
 
+verb=3
+
 _log() {
-    (( verb < $1 )) && return
+    (( verb >= $1 )) || return 0
     echo "$2" "${@:3}" >&2
 }
 
@@ -251,7 +253,6 @@ main() {
     local format=tee
     local simulate=0
     local terminal=x-terminal-emulator
-    local verb=3
 
     local opts
     opts=$(opt_parse "$@") || exit
