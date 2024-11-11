@@ -246,13 +246,12 @@ inject_options_rofi() {
 }
 
 main() {
-    local \
-        config=~/.ssh/config \
-        defaults=~/.config/rofi-ssh-user.defaults \
-        format=tee \
-        simulate=0 \
-        terminal=x-terminal-emulator \
-        verb=3
+    local config=~/.ssh/config
+    local defaults=~/.config/rofi-ssh-user.defaults
+    local format=tee
+    local simulate=0
+    local terminal=x-terminal-emulator
+    local verb=3
 
     local opts
     opts=$(opt_parse "$@") || exit
