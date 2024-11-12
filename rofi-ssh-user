@@ -109,58 +109,60 @@ EOF
     exit
 }
 
+parser_reset_vars() {
+    user=
+    hide=n
+    alts=()
+}
+
+parser_sort_to_users() {
+    case $# in
+        1)
+            users=("$@")
+            ;;
+        2)
+            [[ $1 > $2 ]] && set -- "$2" "$1"
+            users=("$@")
+            ;;
+        3)
+            [[ $1 > $2 ]] && set -- "$2" "$1" "$3"
+            [[ $2 > $3 ]] && set -- "$1" "$3" "$2"
+            [[ $1 > $2 ]] && set -- "$2" "$1" "$3"
+            users=("$@")
+            ;;
+        *)
+            readarray -t users < <(printf '%s\n' "$@" | sort)
+            ;;
+    esac
+}
+
+parser_end_section() {
+    [[ ! -v hosts ]] && return
+
+    if [[ $hide == n ]]; then
+        local users=() h
+        : "${user:=$USER}"
+        parser_sort_to_users "$user" "${alts[@]}"
+
+        for h in "${hosts[@]}"; do
+            # Skip patterns and negations.
+            [[ $h == *[*?!]* ]] && continue
+
+            result+=("${users[@]/%/@$h}")
+        done
+    fi
+
+    parser_reset_vars
+}
+
+
 parse_ssh_config() {
     local user hosts=() hide alts
+    # shellcheck disable=SC2178
     [[ $2 == result ]] || local -n result=$2
     result=()
 
-    reset_vars() {
-        user=
-        hide=n
-        alts=()
-    }
-
-    sort_to_users() {
-        case $# in
-            1)
-                users=("$@")
-                ;;
-            2)
-                [[ $1 > $2 ]] && set -- "$2" "$1"
-                users=("$@")
-                ;;
-            3)
-                [[ $1 > $2 ]] && set -- "$2" "$1" "$3"
-                [[ $2 > $3 ]] && set -- "$1" "$3" "$2"
-                [[ $1 > $2 ]] && set -- "$2" "$1" "$3"
-                users=("$@")
-                ;;
-            *)
-                readarray -t users < <(printf '%s\n' "$@" | sort)
-                ;;
-        esac
-    }
-
-    end_section() {
-        [[ ! -v hosts ]] && return
-
-        if [[ $hide == n ]]; then
-            local users=() h
-            : "${user:=$USER}"
-            sort_to_users "$user" "${alts[@]}"
-
-            for h in "${hosts[@]}"; do
-                # Skip patterns and negations.
-                [[ $h == *[*?!]* ]] && continue
-
-                result+=("${users[@]/%/@$h}")
-            done
-        fi
-
-        reset_vars
-    }
-
-    reset_vars
+    parser_reset_vars
 
     local token line seek=y
     while read -r token line; do
@@ -172,11 +174,11 @@ parse_ssh_config() {
         else
             case ${token,,} in
                 match)
-                    end_section
+                    parser_end_section
                     seek=y ;;
 
                 host)
-                    end_section
+                    parser_end_section
                     read -ra hosts <<< "$line" ;;
 
                 user)
@@ -195,8 +197,7 @@ parse_ssh_config() {
         fi
     done < "$1"
 
-    end_section
-    unset -f reset_vars sort_to_users end_section
+    parser_end_section
 }
 
 # Align user@host list in two columns.
