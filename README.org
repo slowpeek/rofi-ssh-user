@@ -1,14 +1,13 @@
-The script picks hosts from ssh config to show a rofi menu with named
-hosts to connect to. It works similar to =rofi -show ssh= but instead
-of just =host= it shows =user@host= list. With special commands
-embedded into the ssh config one can customize the list.
+The script picks hosts from ssh config to show a rofi menu with named hosts to
+connect to. It works similar to =rofi -show ssh= but instead of just =host= it
+shows =user@host= list. With special commands embedded into the ssh config one
+can customize the list.
 
 [[./screenshot.png]]
 
 * Commands
 
-Commands are tailored for =Host= sections in the config. Command
-syntax:
+Commands are tailored for =Host= sections in the config. Command syntax:
 
 #+begin_example
   ,#+ command arg1 arg2 ...
@@ -16,9 +15,8 @@ syntax:
 
 Available commands:
 
-- hide :: Do not show this host in menu. The same effect can be
-  achieved with =Match host ...= blocks in place of =Host= blocks, as
-  with rofi.
+- hide :: Do not show this host in menu. The same effect can be achieved with
+  =Match host ...= blocks in place of =Host= blocks, as with rofi.
 - alt :: Alternative users to use with the host
 
 Sample ssh config:
@@ -56,29 +54,28 @@ When passed to rofi the list is sorted by host first, user next.
 
 Generic options:
 
-- =-a=, =--align= :: Align menu items in two columns. Only meaningful
-  for monospace fonts
-- =-c=, =--config <config>= :: Use custom ssh config instead of
-  default =~/.ssh/config=
-- =-t=, =--terminal <terminal>= :: Use custom terminal app instead
-  of default =x-terminal-emulator=. It can be either a path or a
-  binary name available in =$PATH=
+- =-a=, =--align= :: Align menu items in two columns. Only meaningful for
+  monospace fonts
+- =-c=, =--config <config>= :: Use custom ssh config instead of default
+  =~/.ssh/config=
+- =-t=, =--terminal <terminal>= :: Use custom terminal app instead of default
+  =x-terminal-emulator=. It can be either a path or a binary name available in
+  =$PATH=
 
 Special options:
 
 - =-h, --help= :: Show usage
 - =-q= :: Less verbose output: mute info messages
 - =-qq= :: Less verbose output: mute info and warning messages
-- =-s= :: Simulate mode: dump the command to be run instead of running
-  it
+- =-s= :: Simulate mode: dump the command to be run instead of running it
 - =-ss= :: Simulate mode: dump the list of hosts to be fed to rofi
 - =-V, --version= :: Show version
 
 Extra options after =--= are passed directly to rofi.
 
 Default generic options and those tailored for rofi can be set in
-=~/.config/rofi-ssh-user.defaults= with =options()= and
-=rofi_options()= arrays in bash syntax. For example:
+=~/.config/rofi-ssh-user.defaults= with =options()= and =rofi_options()= arrays
+in bash syntax. For example:
 
 #+begin_example
   options=(
@@ -96,8 +93,7 @@ The options are prepended to the ones provided explicitly.
 
 * Installation
 
-Put the script (make sure it has execute permission) into =$PATH=, for
-example:
+Put the script (make sure it has execute permission) into =$PATH=, for example:
 
 - =/usr/local/bin/= - for all users
 - =~/.local/bin/= - for the current user only
@@ -107,12 +103,10 @@ Optionally put the desktop file into appropriate location:
 - =/usr/share/applications/= - for all users
 - =~/.local/share/applications/= - for the current user only
 
-Tune the script's options in command line until you're satisfied. Now
-put those options into =~/.config/rofi-ssh-user.defaults= as explained
-in [[#usage][Usage]].
+Tune the script's options in command line until you're satisfied. Now put those
+options into =~/.config/rofi-ssh-user.defaults= as explained in [[#usage][Usage]].
 
-Set some keyboard shortcut for the script/application by means of your
-desktop.
+Set some keyboard shortcut for the script/application by means of your desktop.
 
 * Limitations
 
@@ -124,6 +118,6 @@ The script ignores such things in ssh config:
 
 * Troubleshooting
 
-In case something wrong or nothing happens after an item got picked in
-the menu, append =-s= option and run your command in terminal. It
-would show what it tried to execute on picking the item.
+In case something wrong or nothing happens after an item got picked in the menu,
+append =-s= option and run your command in terminal. It would show what it tried
+to execute on picking the item.
