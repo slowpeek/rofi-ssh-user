@@ -74,7 +74,6 @@ USAGE --
 ${BASH_SOURCE[0]##*/} [options] [-- [rofi options]]
 
 Generic options:
--a, --align                Align menu items in two columns. Only meaningful for monospace fonts
 -c, --config <config>      Use custom ssh config instead of default ~/.ssh/config
 -t, --terminal <terminal>  Use custom terminal app instead of default x-terminal-emulator.
                            It can be either a path or a binary name available in PATH
@@ -270,7 +269,6 @@ inject_options_rofi() {
 main() {
     local config=~/.ssh/config
     local defaults=~/.config/rofi-ssh-user.defaults
-    local format=tee
     local simulate=0
     local terminal=x-terminal-emulator
 
@@ -306,7 +304,7 @@ main() {
                 shift
                 break ;;
             -a|--align)
-                format=align_list ;;
+                : ;;
             -c|--config)
                 config=$2
                 shift ;;
@@ -350,7 +348,7 @@ main() {
     )
 
     local item
-    item=$(printf "%s\n" "${items[@]}" | "$format" | rofi "${rofi_opt[@]}" "$@")
+    item=$(printf "%s\n" "${items[@]}" | align_list | rofi "${rofi_opt[@]}" "$@")
     [[ -n $item ]] || exit
 
     item=${item// /}

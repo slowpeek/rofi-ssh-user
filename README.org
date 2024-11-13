@@ -54,8 +54,6 @@ When passed to rofi the list is sorted by host first, user next.
 
 Generic options:
 
-- =-a=, =--align= :: Align menu items in two columns. Only meaningful for
-  monospace fonts
 - =-c=, =--config <config>= :: Use custom ssh config instead of default
   =~/.ssh/config=
 - =-t=, =--terminal <terminal>= :: Use custom terminal app instead of default
@@ -79,7 +77,7 @@ in bash syntax. For example:
 
 #+begin_example
   options=(
-      -a
+      -t konsole
   )
 
   options_rofi=(
