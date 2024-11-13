@@ -8,7 +8,7 @@ set -eu
 
 # Alternative rofi ssh picker.
 
-SCRIPT_VERSION=0.2+git
+SCRIPT_VERSION=0.2.1
 
 t_green=$'\e[32m'
 t_red=$'\e[31m'
