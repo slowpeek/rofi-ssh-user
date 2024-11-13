@@ -93,20 +93,18 @@ The options are prepended to the ones provided explicitly.
 
 * Installation
 
-Put the script (make sure it has execute permission) into =$PATH=, for example:
+Clone the repo or unpack the zip into =/opt/=. Make the desktop file
+discoverable:
 
-- =/usr/local/bin/= - for all users
-- =~/.local/bin/= - for the current user only
-
-Optionally put the desktop file into appropriate location:
-
-- =/usr/share/applications/= - for all users
-- =~/.local/share/applications/= - for the current user only
+#+begin_example
+  sudo ln -s /opt/rofi-ssh-user/rofi-ssh-user.desktop /usr/share/applications
+#+end_example
 
 Tune the script's options in command line until you're satisfied. Now put those
 options into =~/.config/rofi-ssh-user.defaults= as explained in [[#usage][Usage]].
 
-Set some keyboard shortcut for the script/application by means of your desktop.
+Set some keyboard shortcut for =Rofi SSH user= application by means of your
+desktop.
 
 * Limitations
 
