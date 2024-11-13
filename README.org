@@ -83,9 +83,7 @@ in bash syntax. For example:
   )
 
   options_rofi=(
-      -theme-str 'window { width: 16em; }'
       -theme-str 'listview { scrollbar: false; }'
-      -no-fixed-num-lines
   )
 #+end_example
 

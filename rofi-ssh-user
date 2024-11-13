@@ -340,8 +340,17 @@ main() {
         exit
     fi
 
+    local rofi_opt=(
+        -dmenu
+        -p ssh
+        -font 'mono 12'
+        -theme-str 'window { width: 16em; }'
+        -no-fixed-num-lines
+        -no-custom
+    )
+
     local item
-    item=$(printf "%s\n" "${items[@]}" | "$format" | rofi -dmenu -p ssh "$@")
+    item=$(printf "%s\n" "${items[@]}" | "$format" | rofi "${rofi_opt[@]}" "$@")
     [[ -n $item ]] || exit
 
     item=${item// /}
