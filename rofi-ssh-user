@@ -35,7 +35,7 @@ bye() {
 }
 
 check_empty() {
-    [[ -n $1 ]] || bye "${@:2}"
+    [[ -n $1 ]] || bye "$2"
 }
 
 check_path() {
@@ -320,10 +320,10 @@ main() {
 
     check_exec rofi
 
-    check_empty "$config" -c value is empty
+    check_empty "$config" '-c value is empty'
     check_path "$config" e f r
 
-    check_empty "$terminal" -t value is empty
+    check_empty "$terminal" '-t value is empty'
     check_exec "$terminal"
 
     # Done with options
