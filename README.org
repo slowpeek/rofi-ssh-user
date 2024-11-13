@@ -60,7 +60,7 @@ Generic options:
   =~/.ssh/config=
 - =-t=, =--terminal <terminal>= :: Use custom terminal app instead of default
   =x-terminal-emulator=. It can be either a path or a binary name available in
-  =$PATH=
+  =PATH=
 
 Special options:
 

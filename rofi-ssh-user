@@ -46,10 +46,10 @@ check_path() {
 
     for op; do
         case $op in
-            e) [[ -e $path ]] || bye no such file ;;
-            f) [[ -f $path ]] || bye not a regular file ;;
-            r) [[ -r $path ]] || bye the file is not readable ;;
-            x) [[ -x $path ]] || bye the file is not executable ;;
+            e) [[ -e $path ]] || bye 'no such file' ;;
+            f) [[ -f $path ]] || bye 'not a regular file' ;;
+            r) [[ -r $path ]] || bye 'the file is not readable' ;;
+            x) [[ -x $path ]] || bye 'the file is not executable' ;;
         esac
     done
 }
@@ -58,7 +58,7 @@ check_exec() {
     if [[ $1 == */* ]]; then
         check_path "$1" e f r x
     else
-        type -P "$1" &>/dev/null || bye "'$1'" is not available in \$PATH
+        type -P "$1" &>/dev/null || bye "'$1' is not available in PATH"
     fi
 }
 
@@ -77,7 +77,7 @@ Generic options:
 -a, --align                Align menu items in two columns. Only meaningful for monospace fonts
 -c, --config <config>      Use custom ssh config instead of default ~/.ssh/config
 -t, --terminal <terminal>  Use custom terminal app instead of default x-terminal-emulator.
-                           It can be either a path or a binary name available in \$PATH
+                           It can be either a path or a binary name available in PATH
 
 Special options:
 -h, --help                 Show usage
