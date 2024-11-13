@@ -1,7 +1,6 @@
-The script picks hosts from ssh config to show a rofi menu with named hosts to
-connect to. It works similar to =rofi -show ssh= but instead of just =host= it
-shows =user@host= list. With special commands embedded into the ssh config one
-can customize the list.
+This script is an alternative to =rofi -show ssh=. The key difference is it
+lists /user@host/ instead of just /host/. With special commands embedded into
+the ssh config, one can customize the list.
 
 [[./screenshot.png]]
 
@@ -15,16 +14,16 @@ Commands are tailored for =Host= sections in the config. Command syntax:
 
 Available commands:
 
+- alt :: Alternative users to use with the host
 - hide :: Do not show this host in menu. The same effect can be achieved with
   =Match host ...= blocks in place of =Host= blocks, as with rofi.
-- alt :: Alternative users to use with the host
 
 Sample ssh config:
 
 #+begin_example
-  Host vm-focal.local vm-jammy.local
-      User root
-  ,#+  alt test
+  Host vm-ubuntu.local vm-openbsd.local
+      User vmuser
+  ,#+  alt root
 
   Host laptop.local
 
@@ -34,17 +33,17 @@ Sample ssh config:
   ,#+  hide
 #+end_example
 
-Generated list (in parsing order):
+Generated list:
 
 #+begin_example
-  root@vm-focal.local
-  test@vm-focal.local
-  root@vm-jammy.local
-  test@vm-jammy.local
-  laptop.local
+  root@vm-ubuntu.local
+  vmuser@vm-ubuntu.local
+  root@vm-openbsd.local
+  vmuser@vm-openbsd.local
+  me@laptop.local
 #+end_example
 
-When passed to rofi the list is sorted by host first, user next.
+Domains are listed in the order of discovery. Users are sorted per domain.
 
 * Usage
 
@@ -96,8 +95,8 @@ discoverable:
   sudo ln -s /opt/rofi-ssh-user/rofi-ssh-user.desktop /usr/share/applications
 #+end_example
 
-Tune the script's options in command line until you're satisfied. Now put those
-options into =~/.config/rofi-ssh-user.defaults= as explained in [[#usage][Usage]].
+*Optionally*, tune the options in command line until you're satisfied and put
+those options into =~/.config/rofi-ssh-user.defaults= as explained in [[#usage][Usage]].
 
 Set some keyboard shortcut for =Rofi SSH user= application by means of your
 desktop.
