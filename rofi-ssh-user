@@ -352,7 +352,7 @@ main() {
     [[ -n $item ]] || exit
 
     item=${item// /}
-    local cmd=("$terminal" -e ssh -F "$config" "${item#<default>@}")
+    local cmd=("$terminal" -e ssh -F "$config" "$item")
 
     (( simulate )) || exec "${cmd[@]}"
 
